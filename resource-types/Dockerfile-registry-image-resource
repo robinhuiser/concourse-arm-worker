@@ -3,8 +3,9 @@ FROM golang:1.16.2-alpine3.13 as builder
 ARG registry_image_resource_version
 
 RUN apk add git
-RUN git clone --depth 1 --branch v${registry_image_resource_version} https://github.com/concourse/registry-image-resource.git /src/registry-image-resource
+RUN git clone --depth 1 https://github.com/moczix/registry-image-resource.git /src/registry-image-resource
 WORKDIR /src/registry-image-resource
+RUN git checkout $REGISTRY_IMAGE_COMMIT
 ENV CGO_ENABLED 0
 RUN go get -d ./...
 RUN go build -o /assets/in ./cmd/in
