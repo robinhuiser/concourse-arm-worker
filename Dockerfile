@@ -31,6 +31,7 @@ ADD dist/elm-v${elm_version}-arm64.tar.gz /usr/local/bin
 ARG concourse_version
 RUN git clone --branch v${concourse_version} https://github.com/concourse/concourse /yarn/concourse
 WORKDIR /yarn/concourse
+RUN sed -i 's/\"ryannhg\/date\-format\"\:\ \"2\.3\.0\"/\"ryan\-haskell\/date\-format\"\:\ \"1\.0\.0\"/g' web/elm/elm.json
 
 # Patch the package json since we have elm pre-installed
 RUN cat package.json | jq 'del(.devDependencies ["elm","elm-analyse","elm-format","elm-test"])' > package.json.tmp && \

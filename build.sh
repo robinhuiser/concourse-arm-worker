@@ -18,7 +18,7 @@ source .env
 
 generateResourceMetdata() {
 _type=$1
-_version=${2:1}
+_version=$2
 _privileged=$3
 
 mkdir -p resource-types/$_type
